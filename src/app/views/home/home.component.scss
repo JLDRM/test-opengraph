@@ -1,0 +1,11 @@
+:host {
+    padding: 4rem;
+}
+
+.app-link {
+
+    &:hover {
+        color : pink;
+        cursor: pointer;
+    }
+}

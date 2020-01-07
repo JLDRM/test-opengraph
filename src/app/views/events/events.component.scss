@@ -1,0 +1,12 @@
+.content-wrapper {
+    padding: 4rem
+}
+
+.return {
+    text-align: right;
+    cursor    : pointer;
+
+    &:hover {
+        color: pink;
+    }
+}
