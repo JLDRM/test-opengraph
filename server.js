@@ -5,11 +5,10 @@ const path = require('path');
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static('./dist/test-opengraph'));
+app.use(express.static(process.cwd() + '/dist/test-opengraph'));
 
-app.get('/*', function(req,res) {
-    
-res.sendFile(path.join('./dist/test-opengraph/index.html'));
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(process.cwd() + '/dist/test-opengraph/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
