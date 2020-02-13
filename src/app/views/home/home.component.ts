@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSeoService } from 'src/app/services/app-seo.service';
+import { IAppEvent } from '../views.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const cleanOG = { id: 0, name: 'Random1', image: 'default', type: 'default', title: 'default', url: 'default' };
+    const cleanOG: IAppEvent = { id: 0, name: 'Random1', image: 'default', type: 'default', title: 'default', description: 'default', url: 'default' };
+    this.seoService.setTitleAndDescription(cleanOG);
     this.seoService.setOpenGraphMetaTags(cleanOG);
   }
 }

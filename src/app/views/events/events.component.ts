@@ -1,10 +1,10 @@
-import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { ViewsService, IAppEvent } from '../views.service';
 import { AppSeoService } from 'src/app/services/app-seo.service';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-events',
@@ -23,9 +23,10 @@ export class EventsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.viewService.getCurrentEvent().subscribe(x => {
-      if (x !== undefined) {
-        this.event = x;
+    this.viewService.getCurrentEvent().subscribe(result => {
+      if (result !== undefined) {
+        this.event = result;
+        this.seoService.setTitleAndDescription(this.event);
         this.seoService.setOpenGraphMetaTags(this.event);
       }
     });

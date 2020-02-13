@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Meta, MetaDefinition } from '@angular/platform-browser';
+import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 import { IAppEvent } from '../views/views.service';
 
@@ -14,15 +14,20 @@ export class AppSeoService implements OnDestroy {
   private serviceDestroyed: Subject<boolean> = new Subject();
 
   constructor(
+    private title: Title,
     private meta: Meta,
   ) { }
 
-  setOpenGraphMetaTags(metaInfo: IAppEvent) {
+  setTitleAndDescription(event: IAppEvent) {
+    this.title.setTitle(event.title);
+    this.meta.updateTag({ name: 'description', content: event.description})
+  }
+  setOpenGraphMetaTags(event: IAppEvent) {
     const formatedMetaInfo: MetaDefinition[] = [
-      { property: 'og:title', content: metaInfo.title },
-      { property: 'og:url', content: metaInfo.url },
-      { property: 'og:image', content: metaInfo.image },
-      { property: 'og:type', content: metaInfo.type }
+      { property: 'og:title', content: event.title },
+      { property: 'og:url', content: event.url },
+      { property: 'og:image', content: event.image },
+      { property: 'og:type', content: event.type }
     ];
     formatedMetaInfo.forEach(x => {
       this.meta.updateTag(x);
